@@ -8,7 +8,10 @@ import os
 class Game(object):
 	def __init__(self):
 		try:
-			self.window = pygame.display.set_mode((800, 600), pygame.DOUBLEBUF)
+			width  = 1024
+			height = 768
+
+			self.window = pygame.display.set_mode((width, height), pygame.DOUBLEBUF)
 			self.run    = True
 
 			self.start_scene = True
