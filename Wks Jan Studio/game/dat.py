@@ -23,7 +23,18 @@ class Game(object):
 					for process in pygame.event.get():
 						self.load_event(process, pygame.QUIT, self.end_loop)
 
+					self.scene()
+
 					pygame.display.flip()
+		except:
+			raise
+		return None
+
+	def scene(self):
+		try:
+			import ent_game
+
+			ent_game.spawn_ent("player", self.window)
 		except:
 			raise
 		return None
