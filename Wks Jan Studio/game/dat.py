@@ -34,7 +34,7 @@ class Game(object):
 		try:
 			import ent_game
 
-			ent_game.spawn_ent("player", self.window)
+			ent_game.spawn_ent(self.window, "player")
 		except:
 			raise
 		return None

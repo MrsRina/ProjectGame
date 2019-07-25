@@ -5,10 +5,10 @@ import json
 import sys
 import os
 
-class spawn_ent(object):
-	def __init__(self, render, tag):
+class player(object):
+	def __init__(self, render, skin, tag):
 		try:
-			print("spawned {type}".format(type = tag))
+			import 
 		except:
 			raise
 		return None
