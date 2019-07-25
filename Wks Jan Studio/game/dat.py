@@ -14,6 +14,8 @@ class Game(object):
 			self.window = pygame.display.set_mode((width, height), pygame.DOUBLEBUF)
 			self.run    = True
 
+			pygame.display.set_caption("GameProject")
+
 			self.start_scene = True
 
 			while self.run:
@@ -28,8 +30,8 @@ class Game(object):
 
 	def load_event(self, process, event_name, function):
 		try:
-			if process is event_name:
-				return function() 
+			if process.type is event_name:
+				return function()
 		except:
 			raise
 		return None
