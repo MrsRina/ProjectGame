@@ -11,6 +11,8 @@ class Game(object):
 			width  = 1024
 			height = 768
 
+			import ent_game
+
 			self.window = pygame.display.set_mode((width, height), pygame.DOUBLEBUF)
 			self.run    = True
 
@@ -18,8 +20,12 @@ class Game(object):
 
 			self.start_scene = True
 
+			self.player = ent_game.player(self.window, 128, "beta", "Player")
+
 			while self.run:
 				if self.start_scene:
+					self.window.fill((190, 190, 190, 50))
+
 					for process in pygame.event.get():
 						self.load_event(process, pygame.QUIT, self.end_loop)
 
@@ -32,9 +38,8 @@ class Game(object):
 
 	def scene(self):
 		try:
-			import ent_game
-
-			ent_game.spawn_ent(self.window, "player")
+			self.player.add_event(type = "move")
+			self.player.spawn()
 		except:
 			raise
 		return None
