@@ -55,13 +55,24 @@ class player(object):
 				if self.key[pygame.K_w]:
 					self.y -= 5
 
+					self.frames += 0.1
+
+					if self.frames >= 7:
+						self.frames = 5
+
+
 				if self.key[pygame.K_a]:
 					self.x -= 5
 
+					self.frames += 0.1
+
+					if self.frames >= 6:
+						self.frames = 4
+
 				if self.key[pygame.K_s]:
 					self.y += 5
-
-					self.frames += 1
+					
+					self.frames += 0.1
 
 					if self.frames >= 3:
 						self.frames = 1
