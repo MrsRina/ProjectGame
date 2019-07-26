@@ -20,7 +20,8 @@ class Game(object):
 
 			self.start_scene = True
 
-			self.player = ent_game.player(self.window, 128, "beta", "Player")
+			self.player = ent_game.player(self.window, 800, "beta", "player")
+			self.enemie = ent_game.player(self.window, 500, "galinha", "enemies", ins = self.player)
 
 			while self.run:
 				if self.start_scene:
@@ -38,8 +39,14 @@ class Game(object):
 
 	def scene(self):
 		try:
-			self.player.add_event(type = "move")
+			self.player.add_event(type = "attack")
 			self.player.spawn()
+
+			self.enemie.add_event(type = "attack")
+			self.enemie.spawn()
+
+			self.player.get_damage(self.enemie.hit)
+			self.enemie.get_damage(self.player.hit)
 		except:
 			raise
 		return None

@@ -6,33 +6,27 @@ import sys
 import os
 
 class player(object):
-	def __init__(self, render, size = None, skin = None, tag = None):
+	def __init__(self, render, size = None, skin = None, tag = None, ins = None):
 		try:
 			import images
 
 			self.render    = render
 			self.tag       = tag
-			self.x         = 0
-			self.y         = 0
+			self.x         = 0 if self.tag is "player" else ins.size[0] - 300
+			self.y         = 0 if self.tag is "player" else 0
 			self.life      = 100
 			self.size      = size, size
 			self.frames    = 0
+			self.hit       = 0
 			self.rendering = True
 
 			if skin is "beta":
 				self.sprites = [
-				self.load_image(images.SPRITE_BETA_0),
-				self.load_image(images.SPRITE_BETA_1),
-				self.load_image(images.SPRITE_BETA_2),
-				self.load_image(images.SPRITE_BETA_3),
-				self.load_image(images.SPRITE_BETA_4),
-				self.load_image(images.SPRITE_BETA_5),
-				self.load_image(images.SPRITE_BETA_6),
-				self.load_image(images.SPRITE_BETA_7),
-				self.load_image(images.SPRITE_BETA_8),
-				self.load_image(images.SPRITE_BETA_9),
-				self.load_image(images.SPRITE_BETA_10),
-				self.load_image(images.SPRITE_BETA_11)]
+				self.load_image(images.SPRITE_PLAYER_GUARD),
+				self.load_image(images.SPRITE_PLAYER_PUNCH)]
+
+			if skin is "galinha":
+				self.sprites = [ self.load_image(images.SPRITE_GAL)]
 		except:
 			raise
 		return None
@@ -49,36 +43,23 @@ class player(object):
 
 	def add_event(self, process = None, type = None):
 		try:
-			if type is "move":
+			if type is "attack":
 				self.key = pygame.key.get_pressed()
 
-				if self.key[pygame.K_w]:
-					self.y -= 5
+				if self.key[pygame.K_f]:
+					self.frames = 1 if self.tag is "player" else 0
+					self.hit    = 1 if self.tag is "player" else 0
 
-					self.frames += 0.1
+				else:
+					self.frames = 0
+					self.hit    = 0			
+		except:
+			raise
+		return None
 
-					if self.frames >= 7:
-						self.frames = 5
-
-
-				if self.key[pygame.K_a]:
-					self.x -= 5
-
-					self.frames += 0.1
-
-					if self.frames >= 6:
-						self.frames = 4
-
-				if self.key[pygame.K_s]:
-					self.y += 5
-					
-					self.frames += 0.1
-
-					if self.frames >= 3:
-						self.frames = 1
-
-				if self.key[pygame.K_d]:
-					self.x += 5
+	def get_damage(self, hit):
+		try:
+			self.life -= hit
 		except:
 			raise
 		return None
