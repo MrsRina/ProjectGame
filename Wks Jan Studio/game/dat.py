@@ -16,7 +16,7 @@ class Game(object):
 			self.window = pygame.display.set_mode((width, height), pygame.DOUBLEBUF)
 			self.run    = True
 
-			pygame.display.set_caption("GameProject")
+			pygame.display.set_caption("My Dear Batata")
 
 			self.start_scene = True
 
