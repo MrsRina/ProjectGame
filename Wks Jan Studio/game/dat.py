@@ -11,17 +11,12 @@ class Game(object):
 			width  = 1024
 			height = 768
 
-			import ent_game
-
 			self.window = pygame.display.set_mode((width, height), pygame.DOUBLEBUF)
 			self.run    = True
 
 			pygame.display.set_caption("My Dear Batata")
 
 			self.start_scene = True
-
-			self.player = ent_game.player(self.window, 800, "beta", "player")
-			self.enemie = ent_game.player(self.window, 500, "galinha", "enemies", ins = self.player)
 
 			while self.run:
 				if self.start_scene:
@@ -30,23 +25,7 @@ class Game(object):
 					for process in pygame.event.get():
 						self.load_event(process, pygame.QUIT, self.end_loop)
 
-					self.scene()
-
 					pygame.display.flip()
-		except:
-			raise
-		return None
-
-	def scene(self):
-		try:
-			self.player.add_event(type = "attack")
-			self.player.spawn()
-
-			self.enemie.add_event(type = "attack")
-			self.enemie.spawn()
-
-			self.player.get_damage(self.enemie.hit)
-			self.enemie.get_damage(self.player.hit)
 		except:
 			raise
 		return None
