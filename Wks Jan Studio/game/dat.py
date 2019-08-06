@@ -18,12 +18,20 @@ class Game(object):
 
 			self.start_scene = True
 
+			import mok_2d
+			import images
+
+			self.config_scenes(framework = mok_2d, images = images)
+
 			while self.run:
 				if self.start_scene:
 					self.window.fill((190, 190, 190, 50))
 
 					for process in pygame.event.get():
 						self.load_event(process, pygame.QUIT, self.end_loop)
+						self.planet.move(0, process)
+
+					self.planet.reparent_to(self.window)
 
 					pygame.display.flip()
 		except:
@@ -34,6 +42,14 @@ class Game(object):
 		try:
 			if process.type is event_name:
 				return function()
+		except:
+			raise
+		return None
+
+	def config_scenes(self, framework, images):
+		try:
+			self.planet = framework.load_object("Planet")
+			self.planet.add_image(images.IMAGE_PLANET, "Planet_Image")
 		except:
 			raise
 		return None
