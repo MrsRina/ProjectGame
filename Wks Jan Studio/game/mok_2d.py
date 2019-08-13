@@ -5,7 +5,7 @@ class load_object(object):
 		try:
 			self.tag             = tag
 			self.node            = pygame.rect.Rect(0, 0, 0, 0)
-			self.images          = {}
+			self.images          = []
 			self.rendering_image = self.images
 			self.render          = True
 			self.render_image    = True
@@ -18,7 +18,7 @@ class load_object(object):
 			import io
 			import base64
 
-			self.images[tag] = pygame.transform.scale(pygame.image.load(io.BytesIO(base64.b64decode(image))), (self.node.x, self.node.y))
+			self.images.append(pygame.transform.scale(pygame.image.load(io.BytesIO(base64.b64decode(image))), (self.node.x, self.node.y)))
 		except:
 			raise
 		return None
